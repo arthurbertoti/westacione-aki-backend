@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Dto\Valores\" />
-    <Folder Include="Servicos\" />
   </ItemGroup>
 
 </Project>

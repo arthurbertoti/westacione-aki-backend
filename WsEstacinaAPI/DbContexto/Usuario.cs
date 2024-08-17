@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using WEstacionaAPI.Dto.Entidades;
 using WEstacionaAPI.Dto.Valores;
 
-namespace DBconnection
+namespace WEstacionaAPI.DbContexto
 {
     public interface IUser
     {
@@ -22,7 +22,7 @@ namespace DBconnection
         }   
         public Task<Resposta> Salvar(UsuarioDto usuarioCadastro)
         {
-
+            var _retorno = new UsuarioDto();
             try
             {
 
@@ -51,11 +51,7 @@ namespace DBconnection
                             }
                         );
 
-                        using (var _reader = _command.ExecuteReader())
-                        {
-                            while (_reader.Read())
-                                _retorno.Add(_reader.ObtemDado<ObtemDado>());
-                        }
+                        var _reader = _command.ExecuteReader();
                     }
                 }
             }

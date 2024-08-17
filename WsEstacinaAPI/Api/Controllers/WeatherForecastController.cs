@@ -7,7 +7,7 @@ namespace WsEstacinaAPI.Api.Controllers
     [Route("api/[controller]")]
     public class EspImportacaoEDIController : Controller
     {
-        private readonly EspImportacaoEDINegocio _negocio;
+
         public EspImportacaoEDIController(EspImportacaoEDINegocio negocio)
         {
             _negocio = negocio;
