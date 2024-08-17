@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WsEstacinaAPI.Api.Controllers
+namespace WEstacionaAPI.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

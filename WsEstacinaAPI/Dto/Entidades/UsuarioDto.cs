@@ -1,8 +1,8 @@
-using WEstacionaAPI.Dto.Enums;
+using WsEstacinaAPI.Dto.Enums;
 
-namespace WEstacionaAPI.Dto.Entidades
+namespace WsEstacinaAPI.Dto.Entidades
 {
-    public class UsuarioDto
+    public class Usuario
     {
         public int Id { get; set; }
         public string Login { get; set; } = string.Empty;
