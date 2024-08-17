@@ -1,0 +1,6 @@
+@WsEstacinaAPI_HostAddress = http://localhost:5123
+
+GET {{WsEstacinaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
