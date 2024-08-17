@@ -9,7 +9,7 @@ namespace WsEstacinaAPI.Dto.Entidades
         public string Nome { get; set; } = string.Empty;
         public string Senha { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
-        public ETipoUsuario TipoUsuario { get; set; } = string.Empty;
+        public ETipoUsuario TipoUsuario { get; set; }
         public DateTime? DtCriacao { get; set; }
     }
 }

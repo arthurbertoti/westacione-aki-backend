@@ -64,12 +64,10 @@ CREATE TABLE vagas (
     numero_vaga varchar(25) NOT NULL DEFAULT '',
     disponivel BOOLEAN NOT NULL,
     tipo numeric(1) NOT NULL,  
-    coberto BOOLEAN NOT NULL,
     id_estacionamento integer NOT NULL,
+    preco_hr numeric(12,2) not null,
     FOREIGN KEY (id_estacionamento) REFERENCES estacionamento(id)
 );
-
-
 
 
 CREATE SEQUENCE seq_idReservas 
@@ -110,4 +108,23 @@ CREATE TABLE feedback (
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
     FOREIGN KEY (id_estacionamento) REFERENCES estacionamento(id)
 );
+
+CREATE SEQUENCE seq_idTabPreco 
+    START WITH 1 
+    INCREMENT BY 1 
+    NO MINVALUE 
+    NO MAXVALUE 
+    CACHE 1;
+
+
+create table tabela_preco (
+    id integer not null PRIMARY key default nextval('seq_idTabPreco'),
+    nome varchar(50) not null,
+    tipo_veiculo integer not null,
+    id_estacionamento INTEGER not null,
+    id_usuario integer not null,
+    preco_hr numeric(12,2) not null,
+    FOREIGN key (id_estacionamento) references estacionamento(id),
+    FOREIGN key (id_usuario) references usuario(id)
+)
 
