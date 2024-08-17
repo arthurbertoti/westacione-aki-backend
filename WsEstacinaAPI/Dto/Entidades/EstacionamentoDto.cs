@@ -1,6 +1,6 @@
-﻿namespace WEstacionaAPI.Dto.Entidades
+﻿namespace WsEstacinaAPI.Dto.Entidades
 {
-    public class Estacionamento
+    public class EstacionamentoDto
     {
         public int Id { get; set; }
         public int IdUsuario { get; set; }

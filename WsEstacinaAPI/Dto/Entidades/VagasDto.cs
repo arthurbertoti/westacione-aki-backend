@@ -1,13 +1,14 @@
-﻿using WEstacionaAPI.Dto.Enums;
+﻿using WsEstacinaAPI.Dto.Enums;
 
-namespace WEstacionaAPI.Dto.Entidades
+namespace WsEstacinaAPI.Dto.Entidades
 {
-    public class Vagas
+    public class VagasDto
     {
         public int Id { get; set; }
         public int IdEstacionamento { get; set; }
+        public bool Disponivel { get; set; }
         public int NumeroVaga { get; set; }
         public ETipoVaga Tipo { get; set; }
-        public bool Coberto { get; set; }
+        public decimal PrecoHr { get; set; }
     }
 }

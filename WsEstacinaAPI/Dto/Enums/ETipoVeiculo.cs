@@ -1,4 +1,4 @@
-﻿namespace WEstacionaAPI.Dto.Enums
+﻿namespace WsEstacinaAPI.Dto.Enums
 {
     public enum ETipoVeiculo
     {

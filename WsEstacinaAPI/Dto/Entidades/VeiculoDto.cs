@@ -1,8 +1,8 @@
-﻿using WEstacionaAPI.Dto.Enums;
+﻿using WsEstacinaAPI.Dto.Enums;
 
-namespace WEstacionaAPI.Dto.Entidades
+namespace WsEstacinaAPI.Dto.Entidades
 {
-    public class Veiculo
+    public class VeiculoDto
     {
         public int Id { get; set; }
         public int IdUsuario { get; set; }
