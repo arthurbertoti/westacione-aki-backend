@@ -24,6 +24,7 @@ namespace WEstacionaAPI.Controllers
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
 
         {
+            
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrWhiteSpace(request.Username))
             {
                 return Unauthorized(new Resposta { Sucesso = false, Mensagem = "Username is missing" });
@@ -90,9 +91,8 @@ namespace WEstacionaAPI.Controllers
                 Mensagem = "Token generated successfully",
                 Token = tokenString
             });
-            
-        }*/
-    
+        }
+            */
     }
 
     public class UsuarioAcesso
