@@ -19,8 +19,10 @@ namespace WEstacionaAPI.Controllers
             _configuration = configuration;
         }
 
+        /*
         [HttpPost("[Action]")]
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
+
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrWhiteSpace(request.Username))
             {
@@ -88,7 +90,9 @@ namespace WEstacionaAPI.Controllers
                 Mensagem = "Token generated successfully",
                 Token = tokenString
             });
-        }
+            
+        }*/
+    
     }
 
     public class UsuarioAcesso
