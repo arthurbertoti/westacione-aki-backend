@@ -54,10 +54,6 @@ namespace WEstacionaAPI.Api.Controllers
 
             return CreatedAtAction(nameof(ObterPeloId), new { id = estacionamento.Id }, estacionamento);
         }
-        public async Task<IActionResult> ConsultaPorLocalidade()
-        {
-
-        }
         // GET: api/Estacionamento/ObterPorUsuario
         [HttpGet("[action]")]
         public async Task<IActionResult> ObterPorUsuario(int id)
