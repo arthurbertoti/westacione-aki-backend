@@ -9,5 +9,12 @@
         public string Endereco { get; set; } = string.Empty;
         public int VagasDisponiveis { get; set; }
         public DateTime? DtCriacao { get; set; }
+        public string Rua { get; set; } = string.Empty;
+        public string Cidade { get; set; } = string.Empty;
+        public string Estado { get; set; } = string.Empty;
+        public string Numero { get; set; }
+        public string Observacao { get; set; } = string.Empty;
+        public string Bairro { get; set; } = string.Empty;
+        
     }
 }
