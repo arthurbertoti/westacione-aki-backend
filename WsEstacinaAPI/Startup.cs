@@ -15,10 +15,19 @@ namespace WEstacionaAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var jwtSettings = Configuration.GetSection("JwtSettings");
-            var secretKey = jwtSettings["SecretKey"];
+            services.AddControllers();
 
-            services.AddControllers();            
+            // Configuração do CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", builder =>
+                {
+                    builder.WithOrigins("http://localhost:5173") // Altere para a URL do seu frontend
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
+
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
         }
@@ -30,7 +39,12 @@ namespace WEstacionaAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
             app.UseRouting();
+
+            // Aplicação da política de CORS
+            app.UseCors("AllowSpecificOrigin");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

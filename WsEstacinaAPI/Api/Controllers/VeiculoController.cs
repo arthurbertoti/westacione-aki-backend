@@ -25,7 +25,5 @@ namespace WEstacionaAPI.Api.Controllers
         {
             return await _veiculo.ObtemPeloId(id);
         }
-        [HttpGet("[action]")]
-        public async Task<IActionResult>
     }
 }
