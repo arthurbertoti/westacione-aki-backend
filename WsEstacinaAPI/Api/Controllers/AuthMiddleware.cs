@@ -18,7 +18,7 @@ namespace WEstacionaAPI.Controllers
         {
             _configuration = configuration;
         }
-
+        /*
         [HttpPost("[Action]")]
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
         {
@@ -84,6 +84,7 @@ namespace WEstacionaAPI.Controllers
                 Token = tokenString
             });
         }
+        */
     }
 
     public class UsuarioAcesso
