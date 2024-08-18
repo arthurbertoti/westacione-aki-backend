@@ -18,7 +18,6 @@ namespace WEstacionaAPI.Controllers
         {
             _configuration = configuration;
         }
-
         /*
         [HttpPost("[Action]")]
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
