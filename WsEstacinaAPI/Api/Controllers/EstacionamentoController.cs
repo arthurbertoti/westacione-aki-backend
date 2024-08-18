@@ -56,7 +56,7 @@ namespace WEstacionaAPI.Api.Controllers
             return CreatedAtAction(nameof(ObterPeloId), new { id = estacionamento.Id }, estacionamento);
         }
         // GET: api/Estacionamento/ObterPorUsuario
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> ObterPorUsuario(int id)
         {
             if (id == 0)
@@ -83,7 +83,7 @@ namespace WEstacionaAPI.Api.Controllers
             }
             return Ok(resposta);
         }
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> ObterPeloId(int id)
         {
             if (id == 0)
@@ -100,7 +100,7 @@ namespace WEstacionaAPI.Api.Controllers
             return Ok(resposta);
         }
         // DELETE: api/Estacionamento/ObterPeloId
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var resposta = await _estacionamento.Deletar(id);

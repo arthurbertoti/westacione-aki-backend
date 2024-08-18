@@ -12,12 +12,10 @@ namespace WEstacionaAPI.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly Usuario _usuarioPlei;
-
         public UsuarioController(Usuario usuarioPlei)
         {
             _usuarioPlei = usuarioPlei;
         }
-
         [HttpPost("[action]")]
         public async Task<Resposta> Salvar([FromBody] UsuarioDto param) {
             return await _usuarioPlei.Salvar(param);

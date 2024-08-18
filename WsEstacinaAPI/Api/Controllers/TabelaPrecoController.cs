@@ -51,9 +51,8 @@ namespace WEstacionaAPI.Api.Controllers
 
             return CreatedAtAction(nameof(ObterPeloId), new { id = tabelaPrecoDto.Id }, tabelaPrecoDto);
         }
-
         // GET: api/TabelaPreco/ObterPorId
-        [HttpGet("[action]")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> ObterPeloId(int id)
         {
             if (id == 0)
@@ -70,7 +69,6 @@ namespace WEstacionaAPI.Api.Controllers
 
             return Ok(resposta);
         }
-
         // GET: api/TabelaPreco/ObterPorEstabelecimento
         [HttpGet("[action]")]
         public async Task<IActionResult> ObterPorEstacionamento(int idEstabelecimento)
@@ -91,7 +89,7 @@ namespace WEstacionaAPI.Api.Controllers
         }
 
         // DELETE: api/TabelaPreco/Deletar
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> Deletar(int id)
         {
             if (id == 0)

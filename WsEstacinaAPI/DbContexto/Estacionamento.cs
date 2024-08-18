@@ -12,12 +12,10 @@ namespace WEstacionaAPI.DbContexto
     public class Estacionamento
     {
         private readonly IConfiguration _configuration;
-
         public Estacionamento(IConfiguration configuration)
         {
             _configuration = configuration;
         }
-
         public async Task<Resposta> Salvar(EstacionamentoDto estacionamento)
         {
             var _retorno = new EstacionamentoDto();
@@ -92,7 +90,6 @@ namespace WEstacionaAPI.DbContexto
 
             return new Resposta { Objeto = _retorno, Sucesso = true, Mensagem = "Estacionamento salvo com sucesso." };
         }
-
         public async Task<Resposta<EstacionamentoDto>> ObterEstacionamentoPorId(int id)
         {
             EstacionamentoDto estacionamento = null;
@@ -157,7 +154,6 @@ namespace WEstacionaAPI.DbContexto
 
             return new Resposta<EstacionamentoDto> { Objeto = estacionamento, Sucesso = estacionamento != null };
         }
-
         public async Task<Resposta<List<EstacionamentoDto>>> ObterEstacionamentoPorUsuario(int idUsuario)
         {
             var listaEstacionamentos = new List<EstacionamentoDto>();
@@ -222,7 +218,6 @@ namespace WEstacionaAPI.DbContexto
 
             return new Resposta<List<EstacionamentoDto>> { Objeto = listaEstacionamentos, Sucesso = true };
         }
-
         public async Task<Resposta> Deletar(int id)
         {
             try
@@ -365,8 +360,6 @@ namespace WEstacionaAPI.DbContexto
                 return new Resposta<Paginacao<EstacionamentoDto>>(ex);
             }
         }
-
-
         public async Task<Resposta> Atualizar(EstacionamentoDto estacionamento)
         {
             try
@@ -558,7 +551,5 @@ namespace WEstacionaAPI.DbContexto
 
             return new Resposta<List<EstacionamentoDto>> { Objeto = resultados, Sucesso = true };
         }
-
-
     }
 }

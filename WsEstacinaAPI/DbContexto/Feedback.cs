@@ -66,7 +66,6 @@ namespace WEstacionaAPI.DbContexto
             }
             return Task.FromResult(new Resposta { Objeto = _retorno, Sucesso = true });
         }
-
         public async Task<Resposta> ObterFeedbackPorId(int id)
         {
             FeedbackDto feedback = null;

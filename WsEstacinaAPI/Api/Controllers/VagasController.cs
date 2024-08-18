@@ -12,17 +12,14 @@ namespace WEstacionaAPI.Api.Controllers
     public class VagasController : ControllerBase
     {
         private readonly Vagas _vagas;
-
         public VagasController(Vagas usuarioPlei)
         {
             _vagas = usuarioPlei;
         }
-
         [HttpPost("[action]")]
         public async Task<Resposta> Salvar([FromBody] VagasDto param) {
             return await _vagas.Salvar(param);
         }
-
         [HttpGet("[action]/{id}")]
         public async Task<Resposta<VagasDto>> ObtemPeloId(string id)
         {
