@@ -12,7 +12,7 @@ namespace WEstacionaAPI.DbContexto
     public interface IUser
     {
         Task<Resposta> Salvar(UsuarioDto usuarioCadastro);
-        Task<Resposta> LoginUsuario(string usuario, string senha);
+        Task<Resposta> LoginUsuario(UsuarioLoginDto param);
     }
 
     public class Usuario : IUser
@@ -79,7 +79,7 @@ namespace WEstacionaAPI.DbContexto
             return Task.FromResult(new Resposta { Objeto = _retorno, Sucesso = true });
         }
 
-        public async Task<Resposta> LoginUsuario(string usuario, string senha)
+        public async Task<Resposta> LoginUsuario(UsuarioLoginDto param)
         {
             bool logon = false;
             try
@@ -97,8 +97,8 @@ namespace WEstacionaAPI.DbContexto
                             AND senha = @senha;
                         ";
 
-                        _command.Parameters.AddWithValue("usuario", usuario);
-                        _command.Parameters.AddWithValue("senha", senha);
+                        _command.Parameters.AddWithValue("usuario", param.Usuario);
+                        _command.Parameters.AddWithValue("senha", param.Senha);
 
                         var result = await _command.ExecuteScalarAsync();
                         logon = result != null;
