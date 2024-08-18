@@ -35,8 +35,23 @@ namespace WEstacionaAPI.DbContexto
                         _command.CommandText = $@"
 						    INSERT INTO 
                                 public.usuario
-                            (nome, login, senha, telefone, tipo_usuario, dt_criacao)
-                            VALUES(@nome, @login, @senha, @telefone, @tipousuario, @datacriacao);
+                                (
+                                    nome,
+                                    login,
+                                    senha,
+                                    telefone,
+                                    tipo_usuario,
+                                    dt_criacao
+                                )
+                            VALUES
+                                (
+                                    @nome,
+                                    @login,
+                                    @senha,
+                                    @telefone,
+                                    @tipousuario,
+                                    @datacriacao
+                                );
 						";
 
                         _command.Parameters.Clear();
@@ -46,7 +61,7 @@ namespace WEstacionaAPI.DbContexto
                                 new NpgsqlParameter("@login", usuarioCadastro.Login),
                                 new NpgsqlParameter("@senha", usuarioCadastro.Senha),
                                 new NpgsqlParameter("@telefone", usuarioCadastro.Telefone),
-                                new NpgsqlParameter("@tipousuario", usuarioCadastro.TipoUsuario),
+                                new NpgsqlParameter("@tipousuario", (int)usuarioCadastro.TipoUsuario),
                                 new NpgsqlParameter("@datacriacao", usuarioCadastro.DtCriacao),
                             }
                         );

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBconnection
+namespace WEstacionaAPi.DbContexto
 {
     public interface IUser
     {

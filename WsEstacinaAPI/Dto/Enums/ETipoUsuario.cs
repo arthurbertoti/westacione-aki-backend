@@ -1,8 +1,8 @@
-namespace WsEstacinaAPI.Dto.Enums
+namespace WEstacionaAPI.Dto.Enums
 {
     public enum ETipoUsuario
     {
-        CLIENTE,
-        GERENTE
+        CLIENTE =1,
+        GERENTE = 2
     }
 }

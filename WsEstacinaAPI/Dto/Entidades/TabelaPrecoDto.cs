@@ -1,6 +1,6 @@
-﻿using WsEstacinaAPI.Dto.Enums;
+﻿using WEstacionaAPI.Dto.Enums;
 
-namespace WsEstacinaAPI.Dto.Entidades
+namespace WEstacionaAPI.Dto.Entidades
 {
     public class TabelaPrecoDto
     {

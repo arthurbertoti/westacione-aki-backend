@@ -1,4 +1,4 @@
-﻿namespace WsEstacinaAPI.Dto.Enums
+﻿namespace WEstacionaAPI.Dto.Enums
 {
     public enum EStatusReserva
     {
