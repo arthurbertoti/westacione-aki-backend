@@ -3,6 +3,6 @@
     public enum ETipoVeiculo
     {
         MOTO,
-        CARRO
+        CARRO,
     }
 }
