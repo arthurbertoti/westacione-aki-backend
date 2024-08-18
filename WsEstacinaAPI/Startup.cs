@@ -30,10 +30,7 @@ namespace WEstacionaAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

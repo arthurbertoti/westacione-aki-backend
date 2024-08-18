@@ -9,7 +9,7 @@ namespace WEstacionaAPI.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class UsuarioController : Controller
+    public class UsuarioController : ControllerBase
     {
         private readonly Usuario _usuarioPlei;
 
@@ -22,10 +22,11 @@ namespace WEstacionaAPI.Api.Controllers
         public async Task<Resposta> Salvar([FromBody] UsuarioDto param) {
             return await _usuarioPlei.Salvar(param);
         }
-
+        [HttpPost("[action]")]
         public async Task<Resposta> Login([FromBody] UsuarioLoginDto param)
         {
             return await _usuarioPlei.LoginUsuario(param);
         }
+        
     }
 }

@@ -9,7 +9,7 @@ namespace WEstacionaAPI.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class VagasController : Controller
+    public class VagasController : ControllerBase
     {
         private readonly Vagas _vagas;
 
