@@ -19,9 +19,11 @@ namespace WEstacionaAPI.Controllers
             _configuration = configuration;
         }
 
+        /*
         [HttpPost("[Action]")]
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
         {
+            
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrWhiteSpace(request.Username))
             {
                 return Unauthorized(new Resposta { Sucesso = false, Mensagem = "Username is missing" });
@@ -89,6 +91,7 @@ namespace WEstacionaAPI.Controllers
                 Token = tokenString
             });
         }
+            */
     }
 
     public class UsuarioAcesso
