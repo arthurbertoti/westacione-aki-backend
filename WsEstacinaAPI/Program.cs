@@ -1,3 +1,5 @@
+using WEstacionaAPI.DbContexto;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Adiciona a classe Startup como responsável pela configuração da aplicação
@@ -7,6 +9,7 @@ builder.Services.AddControllers();
 var startup = new WEstacionaAPI.Startup(builder.Configuration);
 startup.ConfigureServices(builder.Services);
 
+builder.Services.AddScoped<Usuario>(); // AddTransient ou AddSingleton podem ser usados conforme a necessidade  
 var app = builder.Build();
 
 // Chama o método de configuração do pipeline de requisição HTTP

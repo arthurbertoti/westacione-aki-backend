@@ -1,5 +1,4 @@
 ﻿using WEstacionaAPI.Dto.Enums;
-using WEstacionaAPI.Dto.Enums;
 
 namespace WEstacionaAPI.Dto.Entidades
 {

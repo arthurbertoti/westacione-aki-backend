@@ -2,7 +2,7 @@
 using System;
 
 namespace WEstacionaAPI.Dto.Entidades
-{
+{   
     public class FeedbackDto
     {
         public int Id { get; set; }
