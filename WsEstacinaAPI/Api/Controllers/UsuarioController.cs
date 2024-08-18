@@ -17,11 +17,6 @@ namespace WEstacionaAPI.Api.Controllers
         {
             _usuarioPlei = usuarioPlei;
         }
-        [HttpPost("[action]")]
-        public async Task<ActionResult> LoginUsuario([FromBody]UserLogin userLogin)
-        {
-            return Ok( await _usuarioPlei.LoginUsuario(userLogin.Usuario, userLogin.Senha));
-        }
 
         [HttpPost("[action]")]
         public async Task<Resposta> Salvar([FromBody] UsuarioDto param) {
@@ -32,11 +27,5 @@ namespace WEstacionaAPI.Api.Controllers
         {
             return await _usuarioPlei.LoginUsuario(param);
         }
-    }
-    public class UserLogin
-    {
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
-
     }
 }
