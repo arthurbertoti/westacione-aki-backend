@@ -7,6 +7,6 @@
         public string Nome { get; set; } = string.Empty;
         public int CapacidadeTotal { get; set; }
         public int VagasDisponiveis { get; set; }
-        public DateTime DtCriacao { get; set; }
+        public DateTime? DtCriacao { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace WEstacionaAPI.Dto.Entidades
         public string Comentario { get; set; } =  string.Empty;
         public DateTime? DataEnvio { get; set; }
         public int IdUsuario { get; set; }
-        public int IdEstabelecimento { get; set; }
+        public int IdEstacionamento { get; set; }
     }
 }
