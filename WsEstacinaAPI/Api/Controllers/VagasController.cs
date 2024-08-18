@@ -30,5 +30,25 @@ namespace WEstacionaAPI.Api.Controllers
         {
             return await _vagas.ObtemPeloIdEstacionamento(id);
         }
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            var result = await _vagas.Deletar(id);
+            if (!result.Sucesso)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Atualizar(VagasDto vagas)
+        {
+            var result = await _vagas.Atualizar(vagas);
+            if (!result.Sucesso)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
     }
 }

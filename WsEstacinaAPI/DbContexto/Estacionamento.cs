@@ -285,7 +285,8 @@ namespace WEstacionaAPI.DbContexto
                     // Conta o número total de registros na tabela
                     var totalCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM public.estacionamento;", _conn);
                     var totalCount = (long)await totalCountCommand.ExecuteScalarAsync();
-                    var totalCountInt = (int)totalCount; // O retorno está vindo como System int 64, então essa conversão de long para int é necessário para n precisar mudar os padrões para system int 64 tbm
+                    /* Não tire essa linha, sei que parece loucura mas funciona */
+                    var totalCountInt = (int)totalCount; /* O retorno está vindo como System int 64, então essa conversão de long para int é necessário para n precisar mudar os padrões para system int 64 tbm */
 
                     // Calcula o offset para a paginação
                     var offset = (page - 1) * pageSize;

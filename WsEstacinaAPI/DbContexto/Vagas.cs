@@ -174,5 +174,128 @@ namespace WEstacionaAPI.DbContexto
                 Mensagem = ""
             };
         }
+
+        public async Task<Resposta> Deletar(int id)
+        {
+            try
+            {
+                var _connStr = _configuration.GetConnectionString("DefaultConnection");
+                using (var _conn = new NpgsqlConnection(_connStr))
+                {
+                    await _conn.OpenAsync();
+                    using (var _command = _conn.CreateCommand())
+                    {
+                        // Verificar se a vaga existe
+                        _command.CommandText = $@"
+                            SELECT 
+                                id
+                            FROM 
+                                public.vagas
+                            WHERE 
+                                id = @id;
+                        ";
+
+                        _command.Parameters.AddWithValue("@id", id);
+
+                        using (var _reader = await _command.ExecuteReaderAsync())
+                        {
+                            if (!await _reader.ReadAsync())
+                            {
+                                return new Resposta { Sucesso = false, Mensagem = "Vaga não encontrada." };
+                            }
+                        }
+
+                        // Excluir a vaga
+                        _command.CommandText = $@"
+                            DELETE FROM 
+                                public.vagas
+                            WHERE 
+                                id = @id;
+                        ";
+
+                        var rowsAffected = await _command.ExecuteNonQueryAsync();
+                        if (rowsAffected == 0)
+                        {
+                            return new Resposta { Sucesso = false, Mensagem = "Nenhuma vaga foi excluída." };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Resposta { Sucesso = false, Mensagem = ex.Message };
+            }
+
+            return new Resposta { Sucesso = true, Mensagem = "Vaga excluída com sucesso." };
+        }
+        public async Task<Resposta> Atualizar(VagasDto vaga)
+        {
+            try
+            {
+                var _connStr = _configuration.GetConnectionString("DefaultConnection");
+                using (var _conn = new NpgsqlConnection(_connStr))
+                {
+                    await _conn.OpenAsync();
+
+                    // Verificar se a vaga existe
+                    using (var _command = _conn.CreateCommand())
+                    {
+                        _command.CommandText = $@"
+                            SELECT 
+                                id
+                            FROM 
+                                public.vagas
+                            WHERE 
+                                id = @id;
+                        ";
+
+                        _command.Parameters.AddWithValue("@id", vaga.Id);
+
+                        using (var _reader = await _command.ExecuteReaderAsync())
+                        {
+                            if (!await _reader.ReadAsync())
+                            {
+                                return new Resposta { Sucesso = false, Mensagem = "Vaga não encontrada." };
+                            }
+                        }
+                    }
+
+                    // Atualizar a vaga
+                    using (var _command = _conn.CreateCommand())
+                    {
+                        _command.CommandText = $@"
+                            UPDATE 
+                                public.vagas
+                            SET 
+                                numero_vaga = @numero_vaga,
+                                disponivel = @disponivel,
+                                tipo = @tipo,
+                                id_estacionamento = @id_estacionamento,
+                                preco_hr = @preco_hr
+                            WHERE 
+                                id = @id;
+                        ";
+
+                        _command.Parameters.AddWithValue("@numero_vaga", vaga.NumeroVaga);
+                        _command.Parameters.AddWithValue("@disponivel", vaga.Disponivel);
+                        _command.Parameters.AddWithValue("@tipo", vaga.Tipo);
+                        _command.Parameters.AddWithValue("@id_estacionamento", vaga.IdEstacionamento);
+                        _command.Parameters.AddWithValue("@preco_hr", vaga.PrecoHr);
+                        _command.Parameters.AddWithValue("@id", vaga.Id);
+
+                        var rowsAffected = await _command.ExecuteNonQueryAsync();
+                        if (rowsAffected == 0)
+                        {
+                            return new Resposta { Sucesso = false, Mensagem = "Nenhuma vaga foi atualizada." };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Resposta { Sucesso = false, Mensagem = ex.Message };
+            }
+            return new Resposta { Sucesso = true, Mensagem = "Vaga atualizada com sucesso." };
+        }
     }
 }
