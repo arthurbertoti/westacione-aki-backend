@@ -6,6 +6,7 @@
         public int IdUsuario { get; set; }
         public string Nome { get; set; } = string.Empty;
         public int CapacidadeTotal { get; set; }
+        public string Endereco { get; set; } = string.Empty;
         public int VagasDisponiveis { get; set; }
         public DateTime? DtCriacao { get; set; }
     }

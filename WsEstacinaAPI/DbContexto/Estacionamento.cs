@@ -36,7 +36,8 @@ namespace WEstacionaAPI.DbContexto
                                     capacidade_total,
                                     vagas_disponiveis,
                                     id_usuario,
-                                    dt_criacao
+                                    dt_criacao,
+                                    endereco    
                                 )
                             VALUES
                                 (
@@ -44,7 +45,8 @@ namespace WEstacionaAPI.DbContexto
                                     @capacidade_total,
                                     @vagas_disponiveis,
                                     @id_usuario,
-                                    @dt_criacao
+                                    @dt_criacao,
+                                    @endereco
                                 );
                         ";
 
@@ -56,6 +58,7 @@ namespace WEstacionaAPI.DbContexto
                         new NpgsqlParameter("@vagas_disponiveis", estacionamento.VagasDisponiveis),
                         new NpgsqlParameter("@id_usuario", estacionamento.IdUsuario),
                         new NpgsqlParameter("@dt_criacao", estacionamento.DtCriacao),
+                        new NpgsqlParameter("@endereco", estacionamento.Endereco)
                             }
                         );
 
@@ -87,7 +90,8 @@ namespace WEstacionaAPI.DbContexto
                                 capacidade_total,
                                 vagas_disponiveis,
                                 id_usuario,
-                                dt_criacao
+                                dt_criacao,
+                                endereco
                             FROM 
                                 public.estacionamento
                             WHERE 
@@ -107,7 +111,8 @@ namespace WEstacionaAPI.DbContexto
                                     CapacidadeTotal = _reader.GetInt32(2),
                                     VagasDisponiveis = _reader.GetInt32(3),
                                     IdUsuario = _reader.GetInt32(4),
-                                    DtCriacao = _reader.GetDateTime(5)
+                                    DtCriacao = _reader.GetDateTime(5),
+                                    Endereco = _reader.GetString(6)
                                 };
                             }
                         }
@@ -138,7 +143,8 @@ namespace WEstacionaAPI.DbContexto
                                 capacidade_total,
                                 vagas_disponiveis,
                                 id_usuario,
-                                dt_criacao
+                                dt_criacao,
+                                endereco
                             FROM 
                                 public.estacionamento
                             WHERE 
@@ -158,7 +164,8 @@ namespace WEstacionaAPI.DbContexto
                                     CapacidadeTotal = _reader.GetInt32(2),
                                     VagasDisponiveis = _reader.GetInt32(3),
                                     IdUsuario = _reader.GetInt32(4),
-                                    DtCriacao = _reader.GetDateTime(5)
+                                    DtCriacao = _reader.GetDateTime(5),
+                                    Endereco = _reader.GetString(6),
                                 };
                                 listaEstacionamentos.Add(estacionamento);
                             }
@@ -269,7 +276,8 @@ namespace WEstacionaAPI.DbContexto
                                 capacidade_total = @capacidade_total,
                                 vagas_disponiveis = @vagas_disponiveis,
                                 id_usuario = @id_usuario,
-                                dt_criacao = @dt_criacao
+                                dt_criacao = @dt_criacao,
+                                endereco = @endereco
                             WHERE 
                                 id = @id;
                          ";
@@ -279,6 +287,7 @@ namespace WEstacionaAPI.DbContexto
                         _command.Parameters.AddWithValue("@vagas_disponiveis", estacionamento.VagasDisponiveis);
                         _command.Parameters.AddWithValue("@id_usuario", estacionamento.IdUsuario);
                         _command.Parameters.AddWithValue("@dt_criacao", estacionamento.DtCriacao);
+                        _command.Parameters.AddWithValue("@endereco", estacionamento.Endereco);
                         _command.Parameters.AddWithValue("@id", estacionamento.Id);
 
                         var rowsAffected = await _command.ExecuteNonQueryAsync();
