@@ -22,6 +22,7 @@ namespace WEstacionaAPI.Controllers
         /*
         [HttpPost("[Action]")]
         public async Task<IActionResult> GenerateToken(UsuarioAcesso request)
+
         {
             
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrWhiteSpace(request.Username))
