@@ -66,9 +66,20 @@ namespace WEstacionaAPI.Api.Controllers
 
             if (!resposta.Sucesso)
             {
-                return NotFound(resposta.Mensagem);
+                return NotFound(resposta);
             }
 
+            return Ok(resposta);
+        }
+        // GET: api/Estacionamento/ObterPorEndereco
+        [HttpGet("[action]")]
+        public async Task<IActionResult> ObterPorEndereco(string rua, string cidade, string estado, string observacao, string bairro)
+        {
+            var resposta = await _estacionamento.BuscarPorEndereco(rua,cidade,estado,observacao,bairro);
+            if (!resposta.Sucesso)
+            {
+                return NotFound(resposta);
+            }
             return Ok(resposta);
         }
         [HttpGet("[action]")]
@@ -102,7 +113,7 @@ namespace WEstacionaAPI.Api.Controllers
         }
         // UPDATE: api/Estaciomaneto/Atualizar
         [HttpPost("[action]")]
-        public async Task<IActionResult> Atualizar(EstacionamentoDto estacionamento)
+        public async Task<IActionResult> Atualizar([FromBody]  EstacionamentoDto estacionamento)
         {
             if (estacionamento.Id == 0)
             {

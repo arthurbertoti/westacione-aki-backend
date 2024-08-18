@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using WEstacionaAPI.Dto.Entidades;
 using WEstacionaAPI.Dto.Valores;
@@ -356,5 +357,117 @@ namespace WEstacionaAPI.DbContexto
             }
             return new Resposta { Sucesso = true, Mensagem = "Estacionamento atualizado com sucesso."};
         }
+        public async Task<Resposta<List<EstacionamentoDto>>> BuscarPorEndereco(
+            string? rua = null,
+            string? cidade = null,
+            string? estado = null,
+            string? observacao = null,
+            string? bairro = null)
+        {
+            var resultados = new List<EstacionamentoDto>();
+
+            try
+            {
+                var _connStr = _configuration.GetConnectionString("DefaultConnection");
+                using (var _conn = new NpgsqlConnection(_connStr))
+                {
+                    await _conn.OpenAsync();
+
+                    using (var _command = _conn.CreateCommand())
+                    {
+                        // Construção dinâmica da consulta SQL
+                        var query = new StringBuilder(@"
+                            SELECT 
+                                id,
+                                nome,
+                                capacidade_total,
+                                vagas_disponiveis,
+                                id_usuario,
+                                dt_criacao,
+                                rua,
+                                numero,
+                                bairro,
+                                cidade,
+                                estado,
+                                observacao
+                            FROM 
+                                public.estacionamento
+                            WHERE 
+                        ");
+
+                        var parameters = new List<NpgsqlParameter>();
+
+                        if (!string.IsNullOrEmpty(rua))
+                        {
+                            query.Append("UPPER(rua) LIKE UPPER(@rua) AND ");
+                            parameters.Add(new NpgsqlParameter("@rua", $"%{rua}%"));
+                        }
+                        if (!string.IsNullOrEmpty(cidade))
+                        {
+                            query.Append("UPPER(cidade) LIKE UPPER(@cidade) AND ");
+                            parameters.Add(new NpgsqlParameter("@cidade", $"%{cidade}%"));
+                        }
+                        if (!string.IsNullOrEmpty(estado))
+                        {
+                            query.Append("UPPER(estado) LIKE UPPER(@estado) AND ");
+                            parameters.Add(new NpgsqlParameter("@estado", $"%{estado}%"));
+                        }
+                        if (!string.IsNullOrEmpty(observacao))
+                        {
+                            query.Append("UPPER(observacao) LIKE UPPER(@observacao) AND ");
+                            parameters.Add(new NpgsqlParameter("@observacao", $"%{observacao}%"));
+                        }
+                        if (!string.IsNullOrEmpty(bairro))
+                        {
+                            query.Append("UPPER(bairro) LIKE UPPER(@bairro) AND ");
+                            parameters.Add(new NpgsqlParameter("@bairro", $"%{bairro}%"));
+                        }
+
+                        // Remove o último "AND" se a cláusula WHERE não estiver vazia
+                        if (parameters.Count > 0)
+                        {
+                            query.Length -= 5; // Remove o último " AND "
+                        }
+                        else
+                        {
+                            query.Append("1 = 1"); // Caso nenhum parâmetro seja fornecido, sempre retorna verdadeiro
+                        }
+
+                        _command.CommandText = query.ToString();
+                        _command.Parameters.AddRange(parameters.ToArray());
+
+                        using (var _reader = await _command.ExecuteReaderAsync())
+                        {
+                            while (await _reader.ReadAsync())
+                            {
+                                resultados.Add(new EstacionamentoDto
+                                {
+                                    Id = _reader.GetInt32(0),
+                                    Nome = _reader.GetString(1),
+                                    CapacidadeTotal = _reader.GetInt32(2),
+                                    VagasDisponiveis = _reader.GetInt32(3),
+                                    IdUsuario = _reader.GetInt32(4),
+                                    DtCriacao = _reader.GetDateTime(5),
+                                    Rua = _reader.GetString(6),
+                                    Numero = _reader.GetString(7),
+                                    Bairro = _reader.GetString(8),
+                                    Cidade = _reader.GetString(9),
+                                    Estado = _reader.GetString(10),
+                                    Observacao = _reader.GetString(11)
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Resposta<List<EstacionamentoDto>>(ex);
+            }
+
+            return new Resposta<List<EstacionamentoDto>> { Objeto = resultados, Sucesso = true };
+        }
+
+
     }
 }
