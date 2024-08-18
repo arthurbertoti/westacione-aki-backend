@@ -5,8 +5,6 @@ VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEstacionaAPI", "WsEstacinaAPI\WEstacionaAPI.csproj", "{689056D5-0BFD-40C7-87B3-702804EF52FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBConnection", "ClassLibrary1\DBConnection.csproj", "{7B7BA32A-2626-4C16-9321-69E91F2462FF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{689056D5-0BFD-40C7-87B3-702804EF52FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689056D5-0BFD-40C7-87B3-702804EF52FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689056D5-0BFD-40C7-87B3-702804EF52FC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B7BA32A-2626-4C16-9321-69E91F2462FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B7BA32A-2626-4C16-9321-69E91F2462FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B7BA32A-2626-4C16-9321-69E91F2462FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B7BA32A-2626-4C16-9321-69E91F2462FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

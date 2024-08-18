@@ -1,11 +1,13 @@
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using WEstacionaAPI.Dto.Entidades;
 
 namespace WEstacionaAPI.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class EspImportacaoEDIController : Controller
+    public class EstacionamentoController : ControllerBase
     {
+
     }
 }

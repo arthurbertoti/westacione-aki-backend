@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace WsEstacinaAPI.Dto.Entidades
+namespace WEstacionaAPI.Dto.Entidades
 {
     public class FeedbackDto
     {
