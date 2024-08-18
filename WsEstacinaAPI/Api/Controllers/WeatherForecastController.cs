@@ -7,5 +7,6 @@ namespace WEstacionaAPI.Api.Controllers
     [Route("api/[controller]")]
     public class EspImportacaoEDIController : Controller
     {
+
     }
 }
