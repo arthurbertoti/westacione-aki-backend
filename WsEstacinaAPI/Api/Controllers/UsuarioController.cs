@@ -22,5 +22,10 @@ namespace WEstacionaAPI.Api.Controllers
         public async Task<Resposta> Salvar([FromBody] UsuarioDto param) {
             return await _usuarioPlei.Salvar(param);
         }
+
+        public async Task<Resposta> Login([FromBody] UsuarioLoginDto param)
+        {
+            return await _usuarioPlei.LoginUsuario(param);
+        }
     }
 }

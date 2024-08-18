@@ -37,6 +37,8 @@ namespace WEstacionaAPI.Controllers
             {
                 return Unauthorized(new Resposta { Sucesso = false, Mensagem = "Authorization header is not in Basic format" });
             }
+            //var issuer = await _databaseService.GetIssuerAsync();
+            //var audience = await _databaseService.GetAudienceAsync();
 
             var base64Credentials = authHeader.Substring("Basic ".Length).Trim();
             var credentials = Encoding.UTF8.GetString(Convert.FromBase64String(base64Credentials)).Split(':');
@@ -64,12 +66,15 @@ namespace WEstacionaAPI.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(storedSecretKey);
 
+            
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, request.Username)
                 }),
+
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

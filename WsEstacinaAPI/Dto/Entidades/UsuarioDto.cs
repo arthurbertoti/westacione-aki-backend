@@ -12,4 +12,10 @@ namespace WEstacionaAPI.Dto.Entidades
         public ETipoUsuario TipoUsuario { get; set; }
         public DateTime? DtCriacao { get; set; }
     }
+
+    public class UsuarioLoginDto
+    {
+        public string Usuario { get; set; } = string.Empty;
+        public string Senha { get; set; } = string.Empty;
+    }
 }
