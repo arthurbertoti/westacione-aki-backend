@@ -3,6 +3,7 @@ using WEstacionaAPI.DbContexto;
 using WEstacionaAPI.Dto.Entidades;
 using WEstacionaAPI.Dto.Valores;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace WEstacionaAPI.Api.Controllers
 {
@@ -110,6 +111,17 @@ namespace WEstacionaAPI.Api.Controllers
             }
 
             return NoContent();
+        }
+        // GET: api/Estacionamento/ObterTodos
+        [HttpGet("[action]")]
+        public async Task<IActionResult> ObterTodos(int page = 1, int pageSize = 10)
+        {
+            var resultado = await _estacionamento.BuscaTodosEstacionamentos(page, pageSize);
+            if (!resultado.Sucesso)
+            {
+                return BadRequest(resultado);
+            }
+            return Ok(resultado);
         }
         // UPDATE: api/Estaciomaneto/Atualizar
         [HttpPost("[action]")]

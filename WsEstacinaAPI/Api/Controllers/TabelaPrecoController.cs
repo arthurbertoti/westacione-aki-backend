@@ -3,6 +3,7 @@ using WEstacionaAPI.DbContexto;
 using WEstacionaAPI.Dto.Entidades;
 using WEstacionaAPI.Dto.Valores;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace WEstacionaAPI.Api.Controllers
 {

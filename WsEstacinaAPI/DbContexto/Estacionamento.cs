@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -275,6 +276,96 @@ namespace WEstacionaAPI.DbContexto
 
             return new Resposta { Sucesso = true, Mensagem = "Estacionamento excluído com sucesso." };
         }
+        public async Task<Resposta<Paginacao<EstacionamentoDto>>> BuscaTodosEstacionamentos(int page = 1, int pageSize = 10)
+        {
+            var resultados = new List<EstacionamentoDto>();
+
+            try
+            {
+                var _connStr = _configuration.GetConnectionString("DefaultConnection");
+                using (var _conn = new NpgsqlConnection(_connStr))
+                {
+                    await _conn.OpenAsync();
+
+                    // Conta o número total de registros na tabela
+                    var totalCountCommand = new NpgsqlCommand("SELECT COUNT(*) FROM public.estacionamento;", _conn);
+                    var totalCount = (long)await totalCountCommand.ExecuteScalarAsync();
+                    var totalCountInt = (int)totalCount; // O retorno está vindo como System int 64, então essa conversão de long para int é necessário para n precisar mudar os padrões para system int 64 tbm
+
+                    // Calcula o offset para a paginação
+                    var offset = (page - 1) * pageSize;
+
+                    var query = @"
+                        SELECT 
+                            id,
+                            nome,
+                            capacidade_total,
+                            vagas_disponiveis,
+                            id_usuario,
+                            dt_criacao,
+                            rua,
+                            numero,
+                            bairro,
+                            cidade,
+                            estado,
+                            observacao
+                        FROM 
+                            public.estacionamento
+                        ORDER BY 
+                            id
+                        LIMIT @pageSize OFFSET @offset;
+                    ";
+
+                    using (var command = new NpgsqlCommand(query, _conn))
+                    {
+                        command.Parameters.AddWithValue("@pageSize", pageSize);
+                        command.Parameters.AddWithValue("@offset", offset);
+
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                resultados.Add(new EstacionamentoDto
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Nome = reader.GetString(1),
+                                    CapacidadeTotal = reader.GetInt32(2),
+                                    VagasDisponiveis = reader.GetInt32(3),
+                                    IdUsuario = reader.GetInt32(4),
+                                    DtCriacao = reader.GetDateTime(5),
+                                    Rua = reader.GetString(6),
+                                    Numero = reader.GetString(7),
+                                    Bairro = reader.GetString(8),
+                                    Cidade = reader.GetString(9),
+                                    Estado = reader.GetString(10),
+                                    Observacao = reader.GetString(11)
+                                });
+                            }
+                        }
+                    }
+
+                    var totalPages = (int)Math.Ceiling(totalCountInt / (double)pageSize);
+
+                    return new Resposta<Paginacao<EstacionamentoDto>>
+                    {
+                        Objeto = new Paginacao<EstacionamentoDto>
+                        {
+                            Itens = resultados,
+                            PaginaAtual = page,
+                            TamanhoPagina = pageSize,
+                            TotalItens = totalCountInt,
+                            TotalPaginas = totalPages
+                        },
+                        Sucesso = true
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Resposta<Paginacao<EstacionamentoDto>>(ex);
+            }
+        }
+
 
         public async Task<Resposta> Atualizar(EstacionamentoDto estacionamento)
         {

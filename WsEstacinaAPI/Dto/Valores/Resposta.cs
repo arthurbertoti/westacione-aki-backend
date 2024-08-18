@@ -37,4 +37,14 @@ namespace WEstacionaAPI.Dto.Valores
             Mensagem = ex.Message;
         }
     }
+
+    public class Paginacao<T>
+    {
+        public IEnumerable<T> Itens { get; set; }
+        public int PaginaAtual { get; set; }
+        public int TamanhoPagina { get; set; }
+        public int TotalItens { get; set; }
+        public int TotalPaginas { get; set; }
+    }
+
 }
